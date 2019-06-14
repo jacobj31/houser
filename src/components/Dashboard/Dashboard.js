@@ -43,10 +43,11 @@ class Dashboard extends Component {
     render(){
         return(
             <div>Dashboard
-            
-            <Link to='/wizard'>
+            <div>
+            <Link to='/wizard/step1'>
             <button>Add New Property</button>
             </Link>
+            </div>
             {this.renderhouses()}
             
             </div>

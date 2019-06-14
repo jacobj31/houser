@@ -1,82 +1,23 @@
 import React, {Component} from 'react'
-import {Link} from 'react-router-dom'
-import axios from 'axios'
+import {Link, Route} from 'react-router-dom'
+import One from '../Trifecta/One'
+import Two from '../Trifecta/Two'
+import Three from '../Trifecta/Three'
+
+
 class Wizard extends Component {
-    constructor(props){
-        super(props)
-
-        this.state={
-            name: '',
-            address: '',
-            city:'',
-            state:'',
-            zip:''
-        }
-       this.handleInput = this.handleInput.bind(this)
-       this.addClick = this.addClick.bind(this)
-    }
-    handleInput (e) {
-        this.setState({
-          [e.target.name]: e.target.value
-        });
-      }
-    clear = () => {
-        this.setState({
-            name:'',
-            address:'',
-            city:'',
-            state:'',
-            zip:''
-        })
-    }
-    addClick () {
-        let {name, address, city, state, zip} = this.state
-        axios.post('/api/house', {name, address, city, state, zip})
-        this.clear()
-        this.props.history.push("/")
-        }
-
-
 
     render(){
-        
         return(
             <div>Wizard
+            <div>
+            <Route path='/wizard/step1' component={One}></Route>
+            <Route path='/wizard/step2' component={Two}></Route>
+            <Route path='/wizard/step3' component={Three}></Route>
+            </div>
             <Link to='/'>
-            <button>Cancel</button>
+                <button>Cancel</button>
             </Link>
-            <input
-                type = 'text'
-                placeholder = 'name'
-                name = 'name'
-                onChange={this.handleInput}
-                value={this.state.name}/>
-            <input
-                type = 'text'
-                placeholder = 'address'
-                name = 'address'
-                onChange={this.handleInput}
-                value={this.state.address}/>
-            <input
-                type = 'text'
-                placeholder = 'city'
-                name = 'city'
-                onChange={this.handleInput}
-                value={this.state.city}/>
-            <input
-                type = 'text'
-                placeholder = 'state'
-                name = 'state'
-                onChange={this.handleInput}
-                value={this.state.state}/>
-            <input
-                type = 'text'
-                placeholder = 'zipcode'
-                name = 'zip'
-                onChange={this.handleInput}
-                value={this.state.zip}/>
-            <button onClick={this.addClick}>Complete</button>
-           
             </div>
         )
     }
